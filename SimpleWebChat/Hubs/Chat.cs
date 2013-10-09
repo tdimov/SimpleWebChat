@@ -10,8 +10,8 @@ namespace SimpleWebChat.Hubs
     {
         public void SendMessage(string message)
         {
-            string username = Environment.MachineName.Substring(0, Environment.MachineName.Length - 3); //cut -PC from computer name
-            string msg = string.Format("{0}: {1}", username, message.Replace("<", " ").Replace(">", " "));
+            string time = DateTime.Now.ToString("HH:mm:ss");
+            string msg = string.Format("{0}: {1}", time, message.Replace("<", " ").Replace(">", " "));
             Clients.All.addMessage(msg);
         }
     }
