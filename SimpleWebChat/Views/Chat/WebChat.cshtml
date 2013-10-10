@@ -6,8 +6,9 @@
     <div>
         <input type="text" id="message" placeholder="Your message here" />
         <div></div>
-        <button id="send" class="btn">Send</button>
+        <button id="send" class="btn btn-info">Send</button>
     </div>
+    <div>Online: <span id="usersCount"></span></div>
     <div id="messages"></div>
 </div>
 
@@ -22,10 +23,29 @@
             var message = $('#message').val();
             chat.server.sendMessage(message);
         });
+
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                var message = $('#message').val();
+                chat.server.sendMessage(message);
+            }
+        });
+
         chat.client.addMessage = addMessage;
+        chat.client.userConnection = userConnection;
+        chat.client.showOnlineUsers = showOnlineUsers;
     });
 
     function addMessage(msg) {
         $('#messages').prepend("<p id=\"msg\">" + msg + "</p>");
+        $('#message').val("");
+    }
+
+    function userConnection(msg) {
+        $('#messages').prepend("<p id=\"userConnection\">" + msg + "</p>");
+    }
+
+    function showOnlineUsers(count) {
+        $('#usersCount').text(count);
     }
 </script>
