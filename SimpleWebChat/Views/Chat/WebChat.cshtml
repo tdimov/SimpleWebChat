@@ -28,6 +28,7 @@
             if (e.keyCode == 13) {
                 e.preventDefault();
                 var message = $('#message').val();
+                $('#message').val("");
                 chat.server.sendMessage(message);
             }
         });
@@ -39,7 +40,6 @@
 
     function addMessage(msg) {
         $('#messages').prepend("<p id=\"msg\">" + msg + "</p>");
-        $('#message').val("");
     }
 
     function userConnection(msg) {
