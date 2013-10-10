@@ -19,7 +19,7 @@ namespace SimpleWebChat.Hubs
                 message = "Hello :)";
             }
 
-            string time = DateTime.Now.ToString("HH:mm:ss");
+            string time = DateTime.UtcNow.AddHours(3).ToString("HH:mm:ss");
             string msg = string.Format("{0}: {1}", time, message.Replace("<", " ").Replace(">", " "));
             Clients.All.addMessage(msg);
         }
@@ -27,7 +27,7 @@ namespace SimpleWebChat.Hubs
         public override Task OnConnected()
         {
             usersCount++;
-            string newConnectedUserInfo = "New user has been connected at " + DateTime.Now.ToString("HH:mm:ss");
+            string newConnectedUserInfo = "One new user connected to the web chat at: " + DateTime.UtcNow.AddHours(3).ToString("HH:mm:ss");
             ShowUsersOnlineCount();
             ShowInfoForNewUserConnection(newConnectedUserInfo);
             return base.OnConnected();
@@ -43,7 +43,9 @@ namespace SimpleWebChat.Hubs
         public override Task OnDisconnected()
         {
             usersCount--;
+            string newConnectedUserInfo = "User disconnected from the web chat at: " + DateTime.UtcNow.AddHours(3).ToString("HH:mm:ss");
             ShowUsersOnlineCount();
+            ShowInfoForNewUserConnection(newConnectedUserInfo);
             return base.OnDisconnected();
         }
 

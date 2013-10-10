@@ -24,8 +24,9 @@
             chat.server.sendMessage(message);
         });
 
-        $(document).keypress(function (e) {
-            if (e.which == 13) {
+        $(document).bind("keypress", function (e) {
+            if (e.keyCode == 13) {
+                e.preventDefault();
                 var message = $('#message').val();
                 chat.server.sendMessage(message);
             }
