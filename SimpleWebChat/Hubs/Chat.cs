@@ -27,7 +27,7 @@ namespace SimpleWebChat.Hubs
         public override Task OnConnected()
         {
             usersCount++;
-            string newConnectedUserInfo = "One new user connected to the web chat at: " + DateTime.UtcNow.AddHours(3).ToString("HH:mm:ss");
+            string newConnectedUserInfo = "One new user is connected to the web chat at: " + DateTime.UtcNow.AddHours(3).ToString("HH:mm:ss");
             ShowUsersOnlineCount();
             ShowInfoForNewUserConnection(newConnectedUserInfo);
             return base.OnConnected();
